@@ -14,31 +14,4 @@
 
 {{ template "chart.requirementsSection" . }}
 
----
-
-## NB! Node should be labeled with "rabbitmq=true" label to match nodeAffinity condition
-See `values.test.yaml` for more options
-
----
-
-### Useful links
-
-https://www.rabbitmq.com/kubernetes/operator/using-operator.html
-
-https://www.rabbitmq.com/kubernetes/operator/troubleshooting-operator.html
-
-https://docs.bitnami.com/kubernetes/infrastructure/rabbitmq-cluster-operator/configuration/
-
-https://github.com/rabbitmq/cluster-operator/tree/main/observability/
-
-https://github.com/rabbitmq/cluster-operator/blob/main/docs/examples/
-
-https://www.rabbitmq.com/java-tools.html
-
-https://github.com/bitnami/charts/tree/main/bitnami/rabbitmq-cluster-operator/
-
-https://github.com/bitnami/containers/tree/main/bitnami/rabbitmq#configuration
-
----
-
 {{ template "chart.valuesSection" . }}

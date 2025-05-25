@@ -22,33 +22,6 @@ Barman Cloud CNPG-I plugin for CloudNativePG
 |------------|------|---------|
 | https://charts.jetstack.io | cert-manager | ~1.17.x |
 
----
-
-## NB! Node should be labeled with "rabbitmq=true" label to match nodeAffinity condition
-See `values.test.yaml` for more options
-
----
-
-### Useful links
-
-https://www.rabbitmq.com/kubernetes/operator/using-operator.html
-
-https://www.rabbitmq.com/kubernetes/operator/troubleshooting-operator.html
-
-https://docs.bitnami.com/kubernetes/infrastructure/rabbitmq-cluster-operator/configuration/
-
-https://github.com/rabbitmq/cluster-operator/tree/main/observability/
-
-https://github.com/rabbitmq/cluster-operator/blob/main/docs/examples/
-
-https://www.rabbitmq.com/java-tools.html
-
-https://github.com/bitnami/charts/tree/main/bitnami/rabbitmq-cluster-operator/
-
-https://github.com/bitnami/containers/tree/main/bitnami/rabbitmq#configuration
-
----
-
 ## Values
 
 | Key | Type | Default | Description |
@@ -57,14 +30,14 @@ https://github.com/bitnami/containers/tree/main/bitnami/rabbitmq#configuration
 | cert-manager.enabled | bool | `false` | Install cert-manager together. # ref: https://cert-manager.io/docs/installation/kubernetes/#installing-with-helm |
 | crds.enabled | bool | `true` |  |
 | crds.keep | bool | `true` |  |
-| customLabels.owner_team | string | `"ops-dba"` |  |
+| customLabels | object | `{}` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `"ghcr.io/cloudnative-pg/plugin-barman-cloud"` |  |
 | image.tag | string | `""` |  |
 | imagePullSecrets | list | `[]` |  |
 | nodeSelector | object | `{}` |  |
 | podAnnotations | object | `{}` |  |
-| podLabels.owner_team | string | `"ops-dba"` |  |
+| podLabels | object | `{}` |  |
 | podSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | podSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | podSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
