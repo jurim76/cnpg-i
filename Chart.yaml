@@ -1,0 +1,15 @@
+apiVersion: v2
+name: cnpg-i
+description: Barman Cloud CNPG-I plugin for CloudNativePG
+appVersion: "v0.4.0"
+dependencies:
+  - name: cert-manager
+    repository: https://charts.jetstack.io
+    version: ~1.17.x
+    condition: cert-manager.enabled
+home: https://cloudnative-pg.io/plugin-barman-cloud/
+maintainers:
+  - name: Juri Malinovski
+sources:
+  - https://github.com/cloudnative-pg/plugin-barman-cloud
+version: 0.4.0
