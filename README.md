@@ -1,6 +1,6 @@
-# cnpg-i
+# plugin-barman-cloud
 
-![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![AppVersion: v0.4.0](https://img.shields.io/badge/AppVersion-v0.4.0-informational?style=flat-square)
+![Version: 0.4.1](https://img.shields.io/badge/Version-0.4.1-informational?style=flat-square) ![AppVersion: v0.4.1](https://img.shields.io/badge/AppVersion-v0.4.1-informational?style=flat-square)
 
 Barman Cloud CNPG-I plugin for CloudNativePG
 
@@ -11,6 +11,7 @@ Barman Cloud CNPG-I plugin for CloudNativePG
 | Name | Email | Url |
 | ---- | ------ | --- |
 | Juri Malinovski |  |  |
+|  | <coil93@gmail.com> |  |
 
 ## Source Code
 
@@ -22,19 +23,23 @@ Barman Cloud CNPG-I plugin for CloudNativePG
 |------------|------|---------|
 | https://charts.jetstack.io | cert-manager | ~1.17.x |
 
+---
+
 ## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` |  |
-| cert-manager.enabled | bool | `false` | Install cert-manager together. # ref: https://cert-manager.io/docs/installation/kubernetes/#installing-with-helm |
+| cert-manager.enabled | bool | `false` | Install cert-manager together. |
 | crds.enabled | bool | `true` |  |
 | crds.keep | bool | `true` |  |
 | customLabels | object | `{}` |  |
+| fullnameOverride | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `"ghcr.io/cloudnative-pg/plugin-barman-cloud"` |  |
 | image.tag | string | `""` |  |
 | imagePullSecrets | list | `[]` |  |
+| nameOverride | string | `""` |  |
 | nodeSelector | object | `{}` |  |
 | podAnnotations | object | `{}` |  |
 | podLabels | object | `{}` |  |
@@ -46,7 +51,8 @@ Barman Cloud CNPG-I plugin for CloudNativePG
 | podSecurityContext.seccompProfile.type | string | `"RuntimeDefault"` |  |
 | rbac.create | bool | `true` |  |
 | replicaCount | int | `1` |  |
-| resources | object | `{}` |  |
+| resources.requests.cpu | string | `"100m"` |  |
+| resources.requests.memory | string | `"128Mi"` |  |
 | securityContext.runAsNonRoot | bool | `true` |  |
 | securityContext.seccompProfile.type | string | `"RuntimeDefault"` |  |
 | service.port | int | `9090` |  |

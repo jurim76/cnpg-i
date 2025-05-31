@@ -1,10 +1,13 @@
 {{- if .Values.rbac.create }}
----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  labels: {{- include "cnpg-i.labels" . | nindent 4 }}
-  name: {{ template "cnpg-i.fullname" . }}:leaderelection
+  labels:
+    {{- include "plugin-barman-cloud.labels" . | nindent 4 }}
+    {{- with .Values.customLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  name: {{ include "plugin-barman-cloud.fullname" . }}:leaderelection
 rules:
 - apiGroups:
   - ""
@@ -41,8 +44,12 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  labels: {{- include "cnpg-i.labels" . | nindent 4 }}
-  name: {{ template "cnpg-i.fullname" . }}:metrics-auth
+  labels:
+    {{- include "plugin-barman-cloud.labels" . | nindent 4 }}
+    {{- with .Values.customLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  name: {{ include "plugin-barman-cloud.fullname" . }}:metrics-auth
 rules:
 - apiGroups:
   - authentication.k8s.io
@@ -60,8 +67,12 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  labels: {{- include "cnpg-i.labels" . | nindent 4 }}
-  name: {{ template "cnpg-i.fullname" . }}:metrics-reader
+  labels:
+    {{- include "plugin-barman-cloud.labels" . | nindent 4 }}
+    {{- with .Values.customLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  name: {{ include "plugin-barman-cloud.fullname" . }}:metrics-reader
 rules:
 - nonResourceURLs:
   - /metrics
@@ -71,8 +82,12 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  labels: {{- include "cnpg-i.labels" . | nindent 4 }}
-  name: {{ template "cnpg-i.fullname" . }}:objectstore-editor
+  labels:
+    {{- include "plugin-barman-cloud.labels" . | nindent 4 }}
+    {{- with .Values.customLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  name: {{ include "plugin-barman-cloud.fullname" . }}:objectstore-editor
 rules:
 - apiGroups:
   - barmancloud.cnpg.io
@@ -96,8 +111,12 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  labels: {{- include "cnpg-i.labels" . | nindent 4 }}
-  name: {{ template "cnpg-i.fullname" . }}:objectstore-viewer
+  labels:
+    {{- include "plugin-barman-cloud.labels" . | nindent 4 }}
+    {{- with .Values.customLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  name: {{ include "plugin-barman-cloud.fullname" . }}:objectstore-viewer
 rules:
 - apiGroups:
   - barmancloud.cnpg.io
@@ -117,8 +136,12 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  labels: {{- include "cnpg-i.labels" . | nindent 4 }}
-  name: {{ template "cnpg-i.fullname" . }}
+  labels:
+    {{- include "plugin-barman-cloud.labels" . | nindent 4 }}
+    {{- with .Values.customLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  name: {{ include "plugin-barman-cloud.fullname" . }}
 rules:
 - apiGroups:
   - ""
@@ -180,42 +203,54 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  labels: {{- include "cnpg-i.labels" . | nindent 4 }}
-  name: {{ template "cnpg-i.fullname" . }}:leaderelection
+  labels:
+    {{- include "plugin-barman-cloud.labels" . | nindent 4 }}
+    {{- with .Values.customLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  name: {{ include "plugin-barman-cloud.fullname" . }}:leaderelection
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: {{ template "cnpg-i.fullname" . }}:leaderelection
+  name: {{ include "plugin-barman-cloud.fullname" . }}:leaderelection
 subjects:
 - kind: ServiceAccount
-  name: {{ include "cnpg-i.serviceAccountName" . }}
+  name: {{ include "plugin-barman-cloud.serviceAccountName" . }}
   namespace: {{ .Release.Namespace }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  labels: {{- include "cnpg-i.labels" . | nindent 4 }}
-  name: {{ template "cnpg-i.fullname" . }}:metrics-auth
+  labels:
+    {{- include "plugin-barman-cloud.labels" . | nindent 4 }}
+    {{- with .Values.customLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  name: {{ include "plugin-barman-cloud.fullname" . }}:metrics-auth
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: {{ template "cnpg-i.fullname" . }}:metrics-auth
+  name: {{ include "plugin-barman-cloud.fullname" . }}:metrics-auth
 subjects:
 - kind: ServiceAccount
-  name: {{ include "cnpg-i.serviceAccountName" . }}
+  name: {{ include "plugin-barman-cloud.serviceAccountName" . }}
   namespace: {{ .Release.Namespace }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  labels: {{- include "cnpg-i.labels" . | nindent 4 }}
-  name: {{ template "cnpg-i.fullname" . }}:cloud-binding
+  labels:
+    {{- include "plugin-barman-cloud.labels" . | nindent 4 }}
+    {{- with .Values.customLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  name: {{ include "plugin-barman-cloud.fullname" . }}:cloud-binding
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: {{ include "cnpg-i.serviceAccountName" . }}
+  name: {{ include "plugin-barman-cloud.serviceAccountName" . }}
 subjects:
 - kind: ServiceAccount
-  name: {{ include "cnpg-i.serviceAccountName" . }}
+  name: {{ include "plugin-barman-cloud.serviceAccountName" . }}
   namespace: {{ .Release.Namespace }}
 {{- end }}

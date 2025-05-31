@@ -1,43 +1,54 @@
----
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: {{ template "cnpg-i.fullname" . }}-client
+  labels:
+    {{- with .Values.customLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  name: {{ include "plugin-barman-cloud.fullname" . }}-client
 spec:
-  commonName: {{ template "cnpg-i.fullname" . }}-client
+  commonName: {{ include "plugin-barman-cloud.fullname" . }}-client
   duration: 2160h
   isCA: false
   issuerRef:
     group: cert-manager.io
     kind: Issuer
-    name: {{ template "cnpg-i.fullname" . }}-selfsigned-issuer
+    name: {{ include "plugin-barman-cloud.fullname" . }}-selfsigned-issuer
   renewBefore: 360h
-  secretName: {{ include "cnpg-i.fullname" . }}-client-tls
+  secretName: {{ include "plugin-barman-cloud.fullname" . }}-client-tls
   usages:
   - client auth
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: {{ template "cnpg-i.fullname" . }}-server
+  labels:
+    {{- with .Values.customLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  name: {{ include "plugin-barman-cloud.fullname" . }}-server
 spec:
-  commonName: {{ template "cnpg-i.fullname" . }}
+  commonName: {{ include "plugin-barman-cloud.fullname" . }}
   dnsNames:
-  - {{ template "cnpg-i.fullname" . }}
+  - {{ include "plugin-barman-cloud.fullname" . }}
   duration: 2160h
   isCA: false
   issuerRef:
     group: cert-manager.io
     kind: Issuer
-    name: {{ template "cnpg-i.fullname" . }}-selfsigned-issuer
+    name: {{ include "plugin-barman-cloud.fullname" . }}-selfsigned-issuer
   renewBefore: 360h
-  secretName: {{ include "cnpg-i.fullname" . }}-server-tls
+  secretName: {{ include "plugin-barman-cloud.fullname" . }}-server-tls
   usages:
   - server auth
 ---
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  name: {{ template "cnpg-i.fullname" . }}-selfsigned-issuer
+  labels:
+    {{- with .Values.customLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  name: {{ include "plugin-barman-cloud.fullname" . }}-selfsigned-issuer
 spec:
   selfSigned: {}

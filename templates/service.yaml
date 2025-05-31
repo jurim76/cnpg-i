@@ -1,19 +1,20 @@
----
 apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    cnpg.io/pluginClientSecret: {{ include "cnpg-i.fullname" . }}-client-tls
+    cnpg.io/pluginClientSecret: {{ include "plugin-barman-cloud.fullname" . }}-client-tls
     cnpg.io/pluginPort: "{{ .Values.service.port }}"
-    cnpg.io/pluginServerSecret: {{ include "cnpg-i.fullname" . }}-server-tls
+    cnpg.io/pluginServerSecret: {{ include "plugin-barman-cloud.fullname" . }}-server-tls
   labels:
-    {{- include "cnpg-i.labels" . | nindent 4 }}
-    app: {{ .Release.Name }}
-    cnpg.io/pluginName: barman-cloud.cloudnative-pg.io
-  name: {{- include "cnpg-i.fullname" . | nindent 4 }}
+    {{- include "plugin-barman-cloud.labels" . | nindent 4 }}
+    {{- with .Values.customLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+    cnpg.io/pluginName: plugin-barman-cloud.cloudnative-pg.io
+  name: {{ include "plugin-barman-cloud.fullname" . }}
 spec:
   type: {{ .Values.service.type }}
   ports:
   - port: {{ .Values.service.port }}
   selector:
-    {{- include "cnpg-i.selectorLabels" . | nindent 4 }}
+    {{- include "plugin-barman-cloud.selectorLabels" . | nindent 4 }}

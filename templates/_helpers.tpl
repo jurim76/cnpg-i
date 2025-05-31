@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "cnpg-i.name" -}}
+{{- define "plugin-barman-cloud.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "cnpg-i.fullname" -}}
+{{- define "plugin-barman-cloud.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "cnpg-i.chart" -}}
+{{- define "plugin-barman-cloud.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "cnpg-i.labels" -}}
-helm.sh/chart: {{ include "cnpg-i.chart" . }}
-{{ include "cnpg-i.selectorLabels" . }}
+{{- define "plugin-barman-cloud.labels" -}}
+helm.sh/chart: {{ include "plugin-barman-cloud.chart" . }}
+{{ include "plugin-barman-cloud.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "cnpg-i.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "cnpg-i.name" . }}
+{{- define "plugin-barman-cloud.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "plugin-barman-cloud.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "cnpg-i.serviceAccountName" -}}
+{{- define "plugin-barman-cloud.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "cnpg-i.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "plugin-barman-cloud.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}

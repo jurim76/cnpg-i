@@ -2,4 +2,4 @@
 .vscode/
 .yamllint
 Chart.lock
-*/charts/
+charts/
